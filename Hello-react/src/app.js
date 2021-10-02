@@ -13,31 +13,31 @@ var template = (
   </div>
 );
 
-var name = "Samsung S10";
-var price = 5000;
-
-var product = {
-  name: "Samsung S12",
-  price: 7000,
-  desc: "iyi bir telefon",
-  types: ["red", "blue"],
+var number = 0;
+var btnOneClassName = "btnRed";
+var btnOneMınusClassNAme = "btnBlue";
+function addOne() {
+  console.log("ad one");
+}
+var minusOne = () => {
+  console.log("minus one");
 };
 
-function getDesc(desc) {
-  if (desc) {
-    return <p id="product-desc">description :{desc}</p>;
-  }
-}
-
 var template2 = (
-  <div id="product-details">
-    <h2 id="product-name">name: {product.name ? product.name : "no name"}</h2>
-    {/* <p id="product-price">price: {product.price== 0 ?'free':product.price}</p> */}
-    {product.price && product.price > 0 && <p> price: {product.price} TL </p>}
-    {getDesc(product.desc)}
-    <p> {product.types.length > 0 ? "there are options" : "no options"} </p>
+  <div>
+    <h1> Number : {number} </h1>
+    <button className={btnOneClassName} onClick={addOne}>
+      +1{" "}
+    </button>
+    <button
+      className={btnOneMınusClassNAme}
+      onClick={() => {
+        console.log("minus one");
+      }}
+    >
+      -1{" "}
+    </button>
   </div>
 );
 
-// ReactDOM
 ReactDOM.render(template2, root);
