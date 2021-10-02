@@ -11,11 +11,27 @@ var template =  <div>
                     </ul>
                 </div>;
 
-    var template2 = (<div id="product-details">
-        <h2 id="product-name">name: Samsung S9</h2>
-        <p id="product-price">price: 3000 TL</p>
-        <p id="product-desc">desrcription: iyi bir telefon</p>
-    </div>);
+var name = "Samsung S10";
+var price = 5000;
+var description = "çok iyi bir telefon"
+
+var product = {
+    name : "Samsung S11",
+    price : 7000,
+    description : "çok iyi bir telefon"
+}
+
+function formatPrice(p) {
+    return p.price + ' TL';
+}
+
+var template2 = (
+    <div id="product-details">
+        <h2 id="product-name">name: {product.name}</h2>
+        <p id="product-price">price: {formatPrice(product)}</p>
+        <p id="product-desc">description: {product.description}</p>
+    </div>
+);
 
 // ReactDOM
 ReactDOM.render(template2, root);
