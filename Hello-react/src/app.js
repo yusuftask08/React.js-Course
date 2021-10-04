@@ -23,14 +23,23 @@ function clearItems() {
   render();
 }
 function render() {
+  var numbers = [1, 2, 3, 4, 5];
+
   var template = (
     <div>
-      <h1 id="header"> {app.title} </h1> <div> {app.desc} </div>{" "}
-      <ul>
+      <h1 id="header"> {app.title} </h1> <div> {app.desc} </div>
+      {
+        <ul>
+          {app.items.map((item,i) => {
+            return <li key={i}> {item} </li>;
+          })}
+        </ul>
+      }
+      {/* <ul>
         <li>Lorem, ipsum.</li>
         <li> Lorem, ipsum. </li>
         <li> Lorem, ipsum. </li>
-      </ul>
+      </ul> */}
       <p>
         <button onClick={clearItems}>Clear Item</button>
       </p>
