@@ -1,43 +1,38 @@
 "use strict";
 
-// JSX - Javascript XML
-var root = document.getElementById("root");
+var root = document.getElementById('root');
 var app = {
-  title: "Todo APP",
-  desc: "Todo uygulaması",
-  items: ["item 1", "item 2"]
+  title: "Todo Application",
+  description: "Lorem, ipsum dolor.",
+  items: ['item 1', 'item 2']
 };
 
-function onFormSubmit(event) {
+var onFormSubmit = function onFormSubmit() {
   event.preventDefault();
   var item = event.target.elements.txtItem.value;
 
   if (item) {
     app.items.push(item);
-    event.target.elements.txtItem.value = "";
+    event.target.elements.txtItem.value = '';
     render();
   }
 
-  console.log("item :>> ", item);
-  console.log("form submit", event);
-}
+  console.log('form submitted');
+};
 
-function clearItems() {
+var clearItems = function clearItems() {
   app.items = [];
   render();
-}
+};
 
-function render() {
-  var numbers = [1, 2, 3, 4, 5];
-  var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", {
-    id: "header"
-  }, " ", app.title, " "), " ", /*#__PURE__*/React.createElement("div", null, " ", app.desc, " "), /*#__PURE__*/React.createElement("ul", null, app.items.map(function (item, i) {
+var render = function render() {
+  var template = /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, app.title), /*#__PURE__*/React.createElement("div", null, app.description, "."), /*#__PURE__*/React.createElement("ul", null, app.items.map(function (item, index) {
     return /*#__PURE__*/React.createElement("li", {
-      key: i
-    }, " ", item, " ");
+      key: index
+    }, item);
   })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("button", {
     onClick: clearItems
-  }, "Clear Item")), /*#__PURE__*/React.createElement("p", null, " ", app.items.length, " "), /*#__PURE__*/React.createElement("form", {
+  }, "Clear Items")), /*#__PURE__*/React.createElement("p", null, app.items.length), /*#__PURE__*/React.createElement("form", {
     onSubmit: onFormSubmit
   }, /*#__PURE__*/React.createElement("input", {
     type: "text",
@@ -46,6 +41,6 @@ function render() {
     type: "submit"
   }, "Add Item")));
   ReactDOM.render(template, root);
-}
+};
 
 render();
