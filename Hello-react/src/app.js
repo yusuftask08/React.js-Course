@@ -1,60 +1,57 @@
-const root = document.getElementById('root');
-
-const app = {
-    title: "Todo Application",
-    description: "Lorem, ipsum dolor.",
-    items: ['item 1','item 2']
-}; 
-
-const onFormSubmit = () => {
-    event.preventDefault();
-
-    let item = event.target.elements.txtItem.value;
-
-    if(item) {
-        app.items.push(item);
-        event.target.elements.txtItem.value='';
-        render();
-    }
-
-    console.log('form submitted');
-}
-
-const clearItems = () => {
-    app.items = [];
-    render();
-}
-
-const render = () => {
-    let template =  (
-        <div>
-            <h1>{app.title}</h1>
-            <div>{app.description}.</div>
-            {
-               <ul>
-                   {
-                       app.items.map((item,index) => {
-                         return <li key={index}>{item}</li>
-                       })
-                   }
-                </ul>
-            }
-            <p>
-                <button onClick={clearItems}>Clear Items</button>
-            </p>
-            <p>{app.items.length}</p>
-            <form onSubmit={onFormSubmit}>
-                <input type="text" name="txtItem"/>
-                <button type="submit">Add Item</button>
-            </form>
-        </div>
+class TodoApp extends React.Component {
+  render() {
+    return (
+      <div>
+        <Header />
+        <Todo />
+        <Action />
+      </div>
     );
-
-    ReactDOM.render(template, root);
+  }
+}
+class Header extends React.Component {
+  render() {
+    return (
+      <div>
+        <h1>Todo App</h1>
+        <div>Lorem, ipsum dolor.</div>
+      </div>
+    );
+  }
 }
 
-render();
+class Todo extends React.Component {
+  render() {
+    return (
+      <div>
+        <ul>
+          <TodoItem />
+        </ul>
+      </div>
+    );
+  }
+}
 
+class TodoItem extends React.Component {
+  render() {
+    return <li>Todo item</li>;
+  }
+}
 
+class Action extends React.Component {
+  render() {
+    return (
+      <div>
+        <p>
+          <button>Clear Items</button>
+        </p>
+        <form>
+          <input type="text" />
+          <button type="submit">Add Item</button>
+        </form>
+      </div>
+    );
+  }
+}
 
-
+ReactDOM.render(<TodoApp />, document.getElementById("root"));
