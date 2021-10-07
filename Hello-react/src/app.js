@@ -36,6 +36,15 @@ class Header extends React.Component {
 }
 
 class Todo extends React.Component {
+  constructor(props) {
+    super(props);
+    this.clearItems = this.clearItems.bind(this);
+  }
+
+  clearItems() {
+    console.log(this.props.items);
+    console.log("clear items");
+  }
   render() {
     return (
       <div>
@@ -44,6 +53,9 @@ class Todo extends React.Component {
             <TodoItem key={index} item={item} />
           ))}
         </ul>
+        <p>
+          <button onClick={this.clearItems}>Clear Items</button>
+        </p>
       </div>
     );
   }
@@ -56,14 +68,19 @@ class TodoItem extends React.Component {
 }
 
 class Action extends React.Component {
+  onFormSubmit(e) {
+    e.preventDefault();
+
+    const item = e.target.elements.txtItem.value.trim();
+    if (item) {
+      console.log("item :>> ", item);
+    }
+  }
   render() {
     return (
       <div>
-        <p>
-          <button>Clear Items</button>
-        </p>
-        <form>
-          <input type="text" />
+        <form onSubmit={this.onFormSubmit}>
+          <input type="text" name="txtItem" />
           <button type="submit">Add Item</button>
         </form>
       </div>
