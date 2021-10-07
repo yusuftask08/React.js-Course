@@ -1,20 +1,35 @@
 class TodoApp extends React.Component {
   render() {
+    const title = "Todo App";
+    const desc = "Lorem, ipsum dolor.";
+    const items = ["item 1", "item 2", "item 3"];
     return (
       <div>
-        <Header />
-        <Todo />
+        <Header title={title} desc={desc} />
+        <Todo items={items} />
         <Action />
       </div>
     );
   }
 }
+
+// const Header = function (props) {
+//   console.log(props);
+//   return (
+//     <div>
+//       <h1>{props.title}</h1>
+//       <div> {props.desc} </div>
+//     </div>
+//   );
+// };
+console.log(React.Component);
 class Header extends React.Component {
   render() {
+    console.log(this.props);
     return (
       <div>
-        <h1>Todo App</h1>
-        <div>Lorem, ipsum dolor.</div>
+        <h1> {this.props.title} </h1>
+        <div>{this.props.desc}</div>
       </div>
     );
   }
@@ -25,7 +40,9 @@ class Todo extends React.Component {
     return (
       <div>
         <ul>
-          <TodoItem />
+          {this.props.items.map((item, index) => (
+            <TodoItem key={index} item={item} />
+          ))}
         </ul>
       </div>
     );
@@ -34,7 +51,7 @@ class Todo extends React.Component {
 
 class TodoItem extends React.Component {
   render() {
-    return <li>Todo item</li>;
+    return <li> {this.props.item} </li>;
   }
 }
 
