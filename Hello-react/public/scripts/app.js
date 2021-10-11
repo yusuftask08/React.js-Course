@@ -33,10 +33,11 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
     _classCallCheck(this, TodoApp);
 
     _this = _super.call(this, props);
+    _this.clearItems = _this.clearItems.bind(_assertThisInitialized(_this));
+    _this.addItem = _this.addItem.bind(_assertThisInitialized(_this));
     _this.state = {
       items: ["item 1", "item 2", "item 3"]
     };
-    _this.clearItems = _this.clearItems.bind(_assertThisInitialized(_this));
     return _this;
   }
 
@@ -48,6 +49,21 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
       });
     }
   }, {
+    key: "addItem",
+    value: function addItem(item) {
+      if (!item) {
+        return "eklemek istediğiniz elemanı girin";
+      } else if (this.state.items.indexOf(item) > -1) {
+        return "bu eleman daha önce eklenmiştir";
+      }
+
+      this.setState(function (prevState) {
+        return {
+          items: prevState.items.concat(item)
+        };
+      });
+    }
+  }, {
     key: "render",
     value: function render() {
       var title = "Todo App";
@@ -55,10 +71,12 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
       return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement(Header, {
         title: title,
         desc: desc
-      }), " ", /*#__PURE__*/React.createElement(Todo, {
+      }), /*#__PURE__*/React.createElement(Todo, {
         items: this.state.items,
         clearItems: this.clearItems
-      }), /*#__PURE__*/React.createElement(Action, null));
+      }), /*#__PURE__*/React.createElement(Action, {
+        addItem: this.addItem
+      }));
     }
   }]);
 
@@ -149,10 +167,17 @@ var Action = /*#__PURE__*/function (_React$Component5) {
 
   var _super5 = _createSuper(Action);
 
-  function Action() {
+  function Action(props) {
+    var _this2;
+
     _classCallCheck(this, Action);
 
-    return _super5.apply(this, arguments);
+    _this2 = _super5.call(this, props);
+    _this2.onFormSubmit = _this2.onFormSubmit.bind(_assertThisInitialized(_this2));
+    _this2.state = {
+      error: ""
+    };
+    return _this2;
   }
 
   _createClass(Action, [{
@@ -160,22 +185,23 @@ var Action = /*#__PURE__*/function (_React$Component5) {
     value: function onFormSubmit(e) {
       e.preventDefault();
       var item = e.target.elements.txtItem.value.trim();
-
-      if (item) {
-        console.log("item :>> ", item);
-      }
+      var error = this.props.addItem(item);
+      this.setState({
+        error: error
+      });
+      e.target.elements.txtItem.value = "";
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("form", {
+      return /*#__PURE__*/React.createElement("div", null, this.state.error && /*#__PURE__*/React.createElement("p", null, " ", this.state.error, " "), /*#__PURE__*/React.createElement("form", {
         onSubmit: this.onFormSubmit
       }, /*#__PURE__*/React.createElement("input", {
         type: "text",
         name: "txtItem"
       }), /*#__PURE__*/React.createElement("button", {
         type: "submit"
-      }, " Add Item "), " "), " ");
+      }, " Add Item ")));
     }
   }]);
 
