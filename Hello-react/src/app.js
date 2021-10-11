@@ -5,7 +5,7 @@ class TodoApp extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.state = {
-      items: ["item 1", "item 2", "item 3","item 4","item 5","item 6"],
+      items: ["item 1", "item 2", "item 3","item 4"],
     };
   }
 
