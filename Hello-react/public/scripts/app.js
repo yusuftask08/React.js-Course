@@ -37,7 +37,7 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
     _this.addItem = _this.addItem.bind(_assertThisInitialized(_this));
     _this.deleteItem = _this.deleteItem.bind(_assertThisInitialized(_this));
     _this.state = {
-      items: ["item 1", "item 2", "item 3", "item 4", "item 5"]
+      items: ["item 1", "item 2", "item 3", "item 4", "item 5", "item 6"]
     };
     return _this;
   }
