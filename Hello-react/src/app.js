@@ -3,9 +3,21 @@ class TodoApp extends React.Component {
     super(props);
     this.clearItems = this.clearItems.bind(this);
     this.addItem = this.addItem.bind(this);
+    this.deleteItem = this.deleteItem.bind(this);
     this.state = {
       items: ["item 1", "item 2", "item 3"],
     };
+  }
+
+  deleteItem(item) {
+    this.setState((prevState) => {
+      const arr = prevState.items.filter((i) => {
+        return item != i;
+      });
+      return {
+        items : arr
+      }
+    });
   }
   clearItems() {
     this.setState({
@@ -29,7 +41,11 @@ class TodoApp extends React.Component {
     return (
       <div>
         <Header title={title} desc={desc} />
-        <Todo items={this.state.items} clearItems={this.clearItems} />
+        <Todo
+          items={this.state.items}
+          deleteItem={this.deleteItem}
+          clearItems={this.clearItems}
+        />
         <Action addItem={this.addItem} />
       </div>
     );
@@ -62,7 +78,11 @@ class Todo extends React.Component {
       <div>
         <ul>
           {this.props.items.map((item, index) => (
-            <TodoItem key={index} item={item} />
+            <TodoItem
+              deleteItem={this.props.deleteItem}
+              key={index}
+              item={item}
+            />
           ))}
         </ul>
         <p>
@@ -74,8 +94,21 @@ class Todo extends React.Component {
 }
 
 class TodoItem extends React.Component {
+  constructor(props) {
+    super(props);
+    this.deleteItem = this.deleteItem.bind(this);
+  }
+  deleteItem() {
+    this.props.deleteItem(this.props.item);
+  }
+
   render() {
-    return <li> {this.props.item} </li>;
+    return (
+      <li>
+        {this.props.item}
+        <button onClick={this.deleteItem}>X</button>
+      </li>
+    );
   }
 }
 
