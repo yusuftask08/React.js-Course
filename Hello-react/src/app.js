@@ -1,12 +1,23 @@
 class TodoApp extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      items: ["item 1", "item 2", "item 3"],
+    };
+    this.clearItems = this.clearItems.bind(this);
+  }
+  clearItems() {
+    this.setState({
+      items: [],
+    });
+  }
   render() {
     const title = "Todo App";
     const desc = "Lorem, ipsum dolor.";
-    const items = ["item 1", "item 2", "item 3"];
     return (
       <div>
-        <Header title={title} desc={desc} />
-        <Todo items={items} />
+        <Header title={title} desc={desc} />{" "}
+        <Todo items={this.state.items} clearItems={this.clearItems} />
         <Action />
       </div>
     );
@@ -17,34 +28,23 @@ class TodoApp extends React.Component {
 //   console.log(props);
 //   return (
 //     <div>
-//       <h1>{props.title}</h1>
-//       <div> {props.desc} </div>
+//       <h1> {props.title} </h1> <div> {props.desc} </div>{" "}
 //     </div>
 //   );
 // };
-console.log(React.Component);
+
 class Header extends React.Component {
   render() {
     console.log(this.props);
     return (
       <div>
-        <h1> {this.props.title} </h1>
-        <div>{this.props.desc}</div>
+        <h1> {this.props.title} </h1> <div> {this.props.desc} </div>{" "}
       </div>
     );
   }
 }
 
 class Todo extends React.Component {
-  constructor(props) {
-    super(props);
-    this.clearItems = this.clearItems.bind(this);
-  }
-
-  clearItems() {
-    console.log(this.props.items);
-    console.log("clear items");
-  }
   render() {
     return (
       <div>
@@ -54,7 +54,7 @@ class Todo extends React.Component {
           ))}
         </ul>
         <p>
-          <button onClick={this.clearItems}>Clear Items</button>
+          <button onClick={this.props.clearItems}> Clear Items </button>{" "}
         </p>
       </div>
     );
@@ -81,8 +81,8 @@ class Action extends React.Component {
       <div>
         <form onSubmit={this.onFormSubmit}>
           <input type="text" name="txtItem" />
-          <button type="submit">Add Item</button>
-        </form>
+          <button type="submit"> Add Item </button>{" "}
+        </form>{" "}
       </div>
     );
   }
