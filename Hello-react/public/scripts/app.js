@@ -22,44 +22,95 @@ function _isNativeReflectConstruct() { if (typeof Reflect === "undefined" || !Re
 
 function _getPrototypeOf(o) { _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) { return o.__proto__ || Object.getPrototypeOf(o); }; return _getPrototypeOf(o); }
 
-var Car = /*#__PURE__*/function (_React$Component) {
-  _inherits(Car, _React$Component);
+var Counter = /*#__PURE__*/function (_React$Component) {
+  _inherits(Counter, _React$Component);
 
-  var _super = _createSuper(Car);
+  var _super = _createSuper(Counter);
 
-  function Car(props) {
+  function Counter(props) {
     var _this;
 
-    _classCallCheck(this, Car);
+    _classCallCheck(this, Counter);
 
     _this = _super.call(this, props);
+    _this.addOne = _this.addOne.bind(_assertThisInitialized(_this));
+    _this.minusOne = _this.minusOne.bind(_assertThisInitialized(_this));
+    _this.reset = _this.reset.bind(_assertThisInitialized(_this));
     _this.state = {
-      brand: "Mazda",
-      model: "Cx-3",
-      color: "white",
-      year: 2015
+      number: 0
     };
-    _this.changeColor = _this.changeColor.bind(_assertThisInitialized(_this));
     return _this;
   }
 
-  _createClass(Car, [{
-    key: "changeColor",
-    value: function changeColor() {
+  _createClass(Counter, [{
+    key: "addOne",
+    value: function addOne() {
+      this.setState(function (prevState) {
+        return {
+          number: prevState.number + 1
+        };
+      });
+    }
+  }, {
+    key: "reset",
+    value: function reset() {
       this.setState({
-        color: "blue"
+        number: 0
+      });
+    }
+  }, {
+    key: "minusOne",
+    value: function minusOne() {
+      this.setState({
+        number: this.state.number - 1
       });
     }
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, this.state.brand, " ", this.state.model), /*#__PURE__*/React.createElement("p", null, "selected color: ", this.state.color, " "), /*#__PURE__*/React.createElement("button", {
-        onClick: this.changeColor
-      }, "Change Color"));
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, "Number: ", this.state.number, " "), /*#__PURE__*/React.createElement("button", {
+        onClick: this.addOne
+      }, "+1"), /*#__PURE__*/React.createElement("button", {
+        onClick: this.minusOne
+      }, " -1 "), /*#__PURE__*/React.createElement("button", {
+        onClick: this.reset
+      }, " Reset"));
     }
   }]);
 
-  return Car;
+  return Counter;
 }(React.Component);
 
-ReactDOM.render( /*#__PURE__*/React.createElement(Car, null), document.getElementById("root"));
+ReactDOM.render( /*#__PURE__*/React.createElement(Counter, null), document.getElementById("root")); // var number = 0;
+// var btnOneClassName = "btnRed";
+// var btnMinusClassName = "btnBlue";
+// function addOne() {
+//     number++;
+//     renderApp();
+//     console.log('add one');
+// }
+// var minusOne = () => {
+//     number--;
+//     renderApp();
+//     console.log('minus one');
+// }
+// function renderApp() {
+//     var template2 = (
+//         <div>
+//             <h1>Number: {number}</h1>
+//             <button id="btnPlusOne" className={btnOneClassName} onClick={addOne}>+1</button>
+//             <button id="btnMinusOne" className={btnMinusClassName} onClick={minusOne}> -1 </button>
+//         </div>
+//     );
+//     ReactDOM.render(template2, root);
+// }
+// function tick() {
+//     var element = (
+//         <div>
+//             <h2>time is: {new Date().toLocaleTimeString()}</h2>
+//         </div>
+//     );
+//     ReactDOM.render(element, root);
+// }
+// setInterval(tick, 1000);
+// // renderApp();
