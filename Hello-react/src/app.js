@@ -75,64 +75,54 @@ class TodoApp extends React.Component {
   }
 }
 
-// const Header = function (props) {
-//   console.log(props);
+// ES6
+const Header = (props) => {
+  return (
+    <div>
+      <h1> {props.title} </h1> <div> {props.desc} </div>
+    </div>
+  );
+};
+
+// ES5
+// function Header(props) {
 //   return (
 //     <div>
-//       <h1> {props.title} </h1> <div> {props.desc} </div>{" "}
+//       <h1> {props.title} </h1>
+//       <div>{props.desc}</div>
 //     </div>
 //   );
-// };
+// }
 
-class Header extends React.Component {
-  render() {
-    console.log(this.props);
-    return (
-      <div>
-        <h1> {this.props.title} </h1> <div> {this.props.desc} </div>
-      </div>
-    );
-  }
-}
+const Todo = (props) => {
+  return (
+    <div>
+      <ul>
+        {props.items.map((item, index) => (
+          <TodoItem deleteItem={props.deleteItem} key={index} item={item} />
+        ))}
+      </ul>
+      <p>
+        <button onClick={props.clearItems}> Clear Items </button>{" "}
+      </p>
+    </div>
+  );
+};
 
-class Todo extends React.Component {
-  render() {
-    return (
-      <div>
-        <ul>
-          {this.props.items.map((item, index) => (
-            <TodoItem
-              deleteItem={this.props.deleteItem}
-              key={index}
-              item={item}
-            />
-          ))}
-        </ul>
-        <p>
-          <button onClick={this.props.clearItems}> Clear Items </button>
-        </p>
-      </div>
-    );
-  }
-}
-
-class TodoItem extends React.Component {
-  constructor(props) {
-    super(props);
-    this.deleteItem = this.deleteItem.bind(this);
-  }
-  deleteItem() {
-    this.props.deleteItem(this.props.item);
-  }
-
-  render() {
-    return (
-      <li>
-        {this.props.item} <button onClick={this.deleteItem}> X </button>
-      </li>
-    );
-  }
-}
+const TodoItem = (props) => {
+  return (
+    <li>
+      {this.props.item}
+      <button
+        onClick={() => {
+          this.props.deleteItem;
+        }}
+      >
+        X
+      </button>
+    </li>
+  );
+};
 
 class Action extends React.Component {
   constructor(props) {
@@ -155,11 +145,12 @@ class Action extends React.Component {
   render() {
     return (
       <div>
-        {this.state.error && <p> {this.state.error} </p>}
+        {" "}
+        {this.state.error && <p> {this.state.error} </p>}{" "}
         <form onSubmit={this.onFormSubmit}>
           <input type="text" name="txtItem" />
-          <button type="submit"> Add Item </button>
-        </form>
+          <button type="submit"> Add Item </button>{" "}
+        </form>{" "}
       </div>
     );
   }

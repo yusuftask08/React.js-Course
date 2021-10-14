@@ -1,5 +1,7 @@
 "use strict";
 
+var _this2 = void 0;
+
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -123,117 +125,58 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
   }]);
 
   return TodoApp;
-}(React.Component); // const Header = function (props) {
-//   console.log(props);
+}(React.Component); // ES6
+
+
+var Header = function Header(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, " ", props.title, " "), " ", /*#__PURE__*/React.createElement("div", null, " ", props.desc, " "));
+}; // ES5
+// function Header(props) {
 //   return (
 //     <div>
-//       <h1> {props.title} </h1> <div> {props.desc} </div>{" "}
+//       <h1> {props.title} </h1>
+//       <div>{props.desc}</div>
 //     </div>
 //   );
-// };
+// }
 
 
-var Header = /*#__PURE__*/function (_React$Component2) {
-  _inherits(Header, _React$Component2);
+var Todo = function Todo(props) {
+  return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("ul", null, props.items.map(function (item, index) {
+    return /*#__PURE__*/React.createElement(TodoItem, {
+      deleteItem: props.deleteItem,
+      key: index,
+      item: item
+    });
+  })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("button", {
+    onClick: props.clearItems
+  }, " Clear Items "), " "));
+};
 
-  var _super2 = _createSuper(Header);
-
-  function Header() {
-    _classCallCheck(this, Header);
-
-    return _super2.apply(this, arguments);
-  }
-
-  _createClass(Header, [{
-    key: "render",
-    value: function render() {
-      console.log(this.props);
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, " ", this.props.title, " "), " ", /*#__PURE__*/React.createElement("div", null, " ", this.props.desc, " "));
+var TodoItem = function TodoItem(props) {
+  return /*#__PURE__*/React.createElement("li", null, _this2.props.item, /*#__PURE__*/React.createElement("button", {
+    onClick: function onClick() {
+      _this2.props.deleteItem;
     }
-  }]);
+  }, "X"));
+};
 
-  return Header;
-}(React.Component);
+var Action = /*#__PURE__*/function (_React$Component2) {
+  _inherits(Action, _React$Component2);
 
-var Todo = /*#__PURE__*/function (_React$Component3) {
-  _inherits(Todo, _React$Component3);
-
-  var _super3 = _createSuper(Todo);
-
-  function Todo() {
-    _classCallCheck(this, Todo);
-
-    return _super3.apply(this, arguments);
-  }
-
-  _createClass(Todo, [{
-    key: "render",
-    value: function render() {
-      var _this2 = this;
-
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("ul", null, this.props.items.map(function (item, index) {
-        return /*#__PURE__*/React.createElement(TodoItem, {
-          deleteItem: _this2.props.deleteItem,
-          key: index,
-          item: item
-        });
-      })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("button", {
-        onClick: this.props.clearItems
-      }, " Clear Items ")));
-    }
-  }]);
-
-  return Todo;
-}(React.Component);
-
-var TodoItem = /*#__PURE__*/function (_React$Component4) {
-  _inherits(TodoItem, _React$Component4);
-
-  var _super4 = _createSuper(TodoItem);
-
-  function TodoItem(props) {
-    var _this3;
-
-    _classCallCheck(this, TodoItem);
-
-    _this3 = _super4.call(this, props);
-    _this3.deleteItem = _this3.deleteItem.bind(_assertThisInitialized(_this3));
-    return _this3;
-  }
-
-  _createClass(TodoItem, [{
-    key: "deleteItem",
-    value: function deleteItem() {
-      this.props.deleteItem(this.props.item);
-    }
-  }, {
-    key: "render",
-    value: function render() {
-      return /*#__PURE__*/React.createElement("li", null, this.props.item, " ", /*#__PURE__*/React.createElement("button", {
-        onClick: this.deleteItem
-      }, " X "));
-    }
-  }]);
-
-  return TodoItem;
-}(React.Component);
-
-var Action = /*#__PURE__*/function (_React$Component5) {
-  _inherits(Action, _React$Component5);
-
-  var _super5 = _createSuper(Action);
+  var _super2 = _createSuper(Action);
 
   function Action(props) {
-    var _this4;
+    var _this3;
 
     _classCallCheck(this, Action);
 
-    _this4 = _super5.call(this, props);
-    _this4.onFormSubmit = _this4.onFormSubmit.bind(_assertThisInitialized(_this4));
-    _this4.state = {
+    _this3 = _super2.call(this, props);
+    _this3.onFormSubmit = _this3.onFormSubmit.bind(_assertThisInitialized(_this3));
+    _this3.state = {
       error: ""
     };
-    return _this4;
+    return _this3;
   }
 
   _createClass(Action, [{
@@ -250,14 +193,14 @@ var Action = /*#__PURE__*/function (_React$Component5) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("div", null, this.state.error && /*#__PURE__*/React.createElement("p", null, " ", this.state.error, " "), /*#__PURE__*/React.createElement("form", {
+      return /*#__PURE__*/React.createElement("div", null, " ", this.state.error && /*#__PURE__*/React.createElement("p", null, " ", this.state.error, " "), " ", /*#__PURE__*/React.createElement("form", {
         onSubmit: this.onFormSubmit
       }, /*#__PURE__*/React.createElement("input", {
         type: "text",
         name: "txtItem"
       }), /*#__PURE__*/React.createElement("button", {
         type: "submit"
-      }, " Add Item ")));
+      }, " Add Item "), " "), " ");
     }
   }]);
 
