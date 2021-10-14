@@ -1,7 +1,5 @@
 "use strict";
 
-var _this2 = void 0;
-
 function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
@@ -154,9 +152,9 @@ var Todo = function Todo(props) {
 };
 
 var TodoItem = function TodoItem(props) {
-  return /*#__PURE__*/React.createElement("li", null, _this2.props.item, /*#__PURE__*/React.createElement("button", {
+  return /*#__PURE__*/React.createElement("li", null, props.item, /*#__PURE__*/React.createElement("button", {
     onClick: function onClick() {
-      _this2.props.deleteItem;
+      props.deleteItem;
     }
   }, "X"));
 };
@@ -167,16 +165,16 @@ var Action = /*#__PURE__*/function (_React$Component2) {
   var _super2 = _createSuper(Action);
 
   function Action(props) {
-    var _this3;
+    var _this2;
 
     _classCallCheck(this, Action);
 
-    _this3 = _super2.call(this, props);
-    _this3.onFormSubmit = _this3.onFormSubmit.bind(_assertThisInitialized(_this3));
-    _this3.state = {
+    _this2 = _super2.call(this, props);
+    _this2.onFormSubmit = _this2.onFormSubmit.bind(_assertThisInitialized(_this2));
+    _this2.state = {
       error: ""
     };
-    return _this3;
+    return _this2;
   }
 
   _createClass(Action, [{

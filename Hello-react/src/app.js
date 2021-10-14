@@ -112,10 +112,10 @@ const Todo = (props) => {
 const TodoItem = (props) => {
   return (
     <li>
-      {this.props.item}
+      {props.item}
       <button
         onClick={() => {
-          this.props.deleteItem;
+          props.deleteItem;
         }}
       >
         X
