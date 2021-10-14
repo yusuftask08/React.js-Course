@@ -37,12 +37,40 @@ var TodoApp = /*#__PURE__*/function (_React$Component) {
     _this.addItem = _this.addItem.bind(_assertThisInitialized(_this));
     _this.deleteItem = _this.deleteItem.bind(_assertThisInitialized(_this));
     _this.state = {
-      items: ["item 1", "item 2", "item 3"]
+      items: ["item 1", "item 2", "item 3", "item 4"]
     };
     return _this;
   }
 
   _createClass(TodoApp, [{
+    key: "componentDidMount",
+    value: function componentDidMount() {
+      console.log("component olu\u015Fturuldu");
+      var json = localStorage.getItem("items");
+      var items = JSON.parse(json);
+
+      if (items) {
+        this.setState({
+          items: items
+        });
+      }
+    }
+  }, {
+    key: "componentDidUpdate",
+    value: function componentDidUpdate(prevProps, prevState) {
+      console.log("component de güncelleme oldu");
+
+      if (prevState.items.length !== this.state.items.length) {
+        var json = JSON.stringify(this.state.items);
+        localStorage.setItem("items", json);
+      }
+    }
+  }, {
+    key: "componentWillUnmount",
+    value: function componentWillUnmount() {
+      console.log("component silindi");
+    }
+  }, {
     key: "deleteItem",
     value: function deleteItem(item) {
       this.setState(function (prevState) {
@@ -120,7 +148,7 @@ var Header = /*#__PURE__*/function (_React$Component2) {
     key: "render",
     value: function render() {
       console.log(this.props);
-      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, " ", this.props.title, " "), " ", /*#__PURE__*/React.createElement("div", null, " ", this.props.desc, " "), " ");
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("h1", null, " ", this.props.title, " "), " ", /*#__PURE__*/React.createElement("div", null, " ", this.props.desc, " "));
     }
   }]);
 
@@ -151,7 +179,7 @@ var Todo = /*#__PURE__*/function (_React$Component3) {
         });
       })), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("button", {
         onClick: this.props.clearItems
-      }, " Clear Items "), " "));
+      }, " Clear Items ")));
     }
   }]);
 
@@ -181,9 +209,9 @@ var TodoItem = /*#__PURE__*/function (_React$Component4) {
   }, {
     key: "render",
     value: function render() {
-      return /*#__PURE__*/React.createElement("li", null, this.props.item, /*#__PURE__*/React.createElement("button", {
+      return /*#__PURE__*/React.createElement("li", null, this.props.item, " ", /*#__PURE__*/React.createElement("button", {
         onClick: this.deleteItem
-      }, "X"));
+      }, " X "));
     }
   }]);
 

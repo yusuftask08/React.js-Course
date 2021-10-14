@@ -5,18 +5,39 @@ class TodoApp extends React.Component {
     this.addItem = this.addItem.bind(this);
     this.deleteItem = this.deleteItem.bind(this);
     this.state = {
-      items: ["item 1", "item 2", "item 3","item 4"],
+      items: ["item 1", "item 2", "item 3", "item 4"],
     };
   }
 
+  componentDidMount() {
+    console.log(`component oluşturuldu`);
+    const json = localStorage.getItem("items");
+    const items = JSON.parse(json);
+    if (items) {
+      this.setState({
+        items: items,
+      });
+    }
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    console.log("component de güncelleme oldu");
+    if (prevState.items.length !== this.state.items.length) {
+      const json = JSON.stringify(this.state.items);
+      localStorage.setItem("items", json);
+    }
+  }
+  componentWillUnmount() {
+    console.log("component silindi");
+  }
   deleteItem(item) {
     this.setState((prevState) => {
       const arr = prevState.items.filter((i) => {
         return item != i;
       });
       return {
-        items : arr
-      }
+        items: arr,
+      };
     });
   }
   clearItems() {
@@ -32,7 +53,9 @@ class TodoApp extends React.Component {
     }
 
     this.setState((prevState) => {
-      return { items: prevState.items.concat(item) };
+      return {
+        items: prevState.items.concat(item),
+      };
     });
   }
   render() {
@@ -66,7 +89,7 @@ class Header extends React.Component {
     console.log(this.props);
     return (
       <div>
-        <h1> {this.props.title} </h1> <div> {this.props.desc} </div>{" "}
+        <h1> {this.props.title} </h1> <div> {this.props.desc} </div>
       </div>
     );
   }
@@ -86,7 +109,7 @@ class Todo extends React.Component {
           ))}
         </ul>
         <p>
-          <button onClick={this.props.clearItems}> Clear Items </button>{" "}
+          <button onClick={this.props.clearItems}> Clear Items </button>
         </p>
       </div>
     );
@@ -105,8 +128,7 @@ class TodoItem extends React.Component {
   render() {
     return (
       <li>
-        {this.props.item}
-        <button onClick={this.deleteItem}>X</button>
+        {this.props.item} <button onClick={this.deleteItem}> X </button>
       </li>
     );
   }
