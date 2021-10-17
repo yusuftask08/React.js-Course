@@ -1,20 +1,30 @@
 const user = {
-    name: "yusuf taskiran",
-    email: "yusuftask@gmail.com",
-    city: "İstanbul",
-    roles: ['admin', 'customer'],
+    name: 'sadikturan',
+    email: 'info@sadikturan.com',
+    city: 'Kocaeli',
+    roles: ['admin','customer'],
     getRoles: function() {
-        const that = this;
-        this.roles.forEach((role) => {
-            console.log(role)
+        this.roles.forEach((role)=> {
+            console.log(role);
+            console.log(this.name);
         })
     }
 }
 
-user.getRoles()
+user.getRoles();
 
 const addES5 = function() {
-    console.log(arguments)
+   let total = 0;
+    for(let i=0; i<arguments.length;i++) {
+        total += arguments[i];
+    }
+   return total;
 }
 
-addES5(5, 10)
+const addES6 = () => {
+    console.log(arguments);
+}
+
+console.log(addES5(5,10,20,30));
+console.log(addES5(5,10,20,30,40));
+addES6();

@@ -2,7 +2,7 @@ class Person {
     constructor(name = 'Guest', year = 1900) {
         this.name = name;
         this.year = year;
-        console.log('constructor çalıştı..');
+        console.log('constructor çalıştı.');
     }
 
     calculateAge() {

@@ -1,13 +1,19 @@
 const user = {
-    name: 'yusuf',
+    name: 'sadikturan',
     getUserName() {
         return this.name;
     }
 }
 
-console.log(user.name)
+console.log(user.name);
+console.log(user.getUserName());
 
-const myFunc = function(){
+const getName = user.getUserName;
+
+console.log(getName());
+
+const myFunc = function() {
     console.log(this);
 }
+
 myFunc();
